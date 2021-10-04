@@ -19,14 +19,12 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private  Boolean isConfirmed;
 
 
-    public UserPrincipal(Long id, String email, String password, Boolean isConfirmed) {
+    public UserPrincipal(Long id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.isConfirmed = isConfirmed;
     }
 
     public static UserPrincipal create(UserModel user) {
@@ -34,9 +32,7 @@ public class UserPrincipal implements UserDetails {
         return new UserPrincipal(
                 user.getId(),
                 user.getEmail(),
-                user.getPassword(),
-                user.isConfirmed()
-
+                user.getPassword()
         );
     }
 
@@ -100,11 +96,4 @@ public class UserPrincipal implements UserDetails {
         return Objects.hash(id);
     }
 
-    public Boolean getConfirmed() {
-        return isConfirmed;
-    }
-
-    public void setConfirmed(Boolean confirmed) {
-        isConfirmed = confirmed;
-    }
 }

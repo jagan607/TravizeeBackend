@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.referme.auth_services.security.JwtAuthenticationFilter.*;
+import static com.example.travizee.security.JwtAuthenticationFilter.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 

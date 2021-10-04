@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "travizee_user")
 public class UserModel {
 
     @Id
@@ -25,8 +25,7 @@ public class UserModel {
     @Column(name = "PasswordToken")
     private String PasswordToken;
 
-    @Column(name = "isConfirmed")
-    private boolean isConfirmed = false;
+
 
     @Column(name = "username")
     private String username;
@@ -79,13 +78,5 @@ public class UserModel {
         this.PasswordToken = token;
     }
 
-
-    public boolean isConfirmed() {
-        return isConfirmed;
-    }
-
-    public void setConfirmed(boolean confirmed) {
-        isConfirmed = confirmed;
-    }
 
 }

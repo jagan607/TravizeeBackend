@@ -1,10 +1,10 @@
 package com.example.travizee.security;
 
+import com.example.travizee.model.UserModel;
+import com.example.travizee.payload.SignupResponse;
+import com.example.travizee.payload.UserDetails;
+import com.example.travizee.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.referme.auth_services.model.UserModel;
-import com.referme.auth_services.payload.SignupResponse;
-import com.referme.auth_services.payload.UserDetails;
-import com.referme.auth_services.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -76,7 +76,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
       //  Long id =  userDetailsService.getUserId(sub);
-        res.getWriter().write(new ObjectMapper().writeValueAsString( new UserDetails(((UserPrincipal) auth.getPrincipal()).getEmail() ,((UserPrincipal) auth.getPrincipal()).getId(),((UserPrincipal) auth.getPrincipal()).getConfirmed(), new SignupResponse(true,"Login Successful",token,getUserIdFromJWT(token)))));
+        res.getWriter().write(new ObjectMapper().writeValueAsString( new UserDetails(((UserPrincipal) auth.getPrincipal()).getEmail() ,((UserPrincipal) auth.getPrincipal()).getId(), new SignupResponse(true,"Login Successful",token,getUserIdFromJWT(token)))));
 
     }
 

@@ -44,10 +44,6 @@ public class UserService implements UserDetailsService {
                         new UsernameNotFoundException("User not found with username or email : " + username)
                 );
 
-        if (!user.isConfirmed()){
-            throw new UsernameNotFoundException("User not confirmed : " + username);
-        }
-
         return UserPrincipal.create(user);
     }
 

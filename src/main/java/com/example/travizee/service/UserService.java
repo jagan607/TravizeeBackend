@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -57,6 +58,14 @@ public class UserService implements UserDetailsService {
         return UserPrincipal.create(user);
     }
 
+    public UserModel save(UserModel um){
+        return loginRepository.save(um);
+    }
+
+    public Optional<UserModel> findById(Long id) {
+        return loginRepository.findById(id);
+    }
+
 
 
 
@@ -66,8 +75,8 @@ public class UserService implements UserDetailsService {
         loginRepository.save(user);
     }
 
-    public UserModel getUserById(Long id){
-        return loginRepository.findById(id).orElseThrow();
+    public UserModel getUserByEmail(String email){
+        return loginRepository.findByEmail(email).orElseThrow();
     }
 
 

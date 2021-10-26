@@ -10,7 +10,6 @@ public class UserModel {
 
     @Id
     @Column(name = "userid")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
 
@@ -34,7 +33,18 @@ public class UserModel {
 
     public UserModel() {}
 
-    public UserModel(@JsonProperty("username") String userName,
+    public UserModel(@JsonProperty("userid") Long id,
+                     @JsonProperty("username") String userName,
+                     @JsonProperty("email") String email,
+                     @JsonProperty("password") String password)
+    {
+        this.username = userName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public UserModel(
+                     @JsonProperty("username") String userName,
                      @JsonProperty("email") String email,
                      @JsonProperty("password") String password)
     {
@@ -79,4 +89,11 @@ public class UserModel {
     }
 
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

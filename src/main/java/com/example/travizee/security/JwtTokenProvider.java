@@ -5,9 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -22,15 +24,13 @@ public class JwtTokenProvider {
 
     public String generateToken(Authentication authentication) {
 
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
-
+        Long now = System.currentTimeMillis();
         return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
+                .setSubject(authentication.getName())
+                .claim("authorities", authentication.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .setIssuedAt(new Date(now))
+                .setExpiration(new Date(now + jwtExpirationInMs))  // in milliseconds
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

@@ -102,6 +102,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 .permitAll()
                 .antMatchers("/login")
                 .permitAll()
+                .antMatchers("/facebook/signin")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

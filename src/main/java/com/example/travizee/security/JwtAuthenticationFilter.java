@@ -1,6 +1,7 @@
 package com.example.travizee.security;
 
 import com.example.travizee.model.UserModel;
+import com.example.travizee.model.facebook.FacebookPicture;
 import com.example.travizee.payload.SignupResponse;
 import com.example.travizee.payload.UserDetails;
 import com.example.travizee.service.UserService;
@@ -76,7 +77,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
       //  Long id =  userDetailsService.getUserId(sub);
-        res.getWriter().write(new ObjectMapper().writeValueAsString( new UserDetails(((UserPrincipal) auth.getPrincipal()).getEmail() ,((UserPrincipal) auth.getPrincipal()).getId(), new SignupResponse(true,"Login Successful",token,getUserIdFromJWT(token)))));
+        res.getWriter().write(new ObjectMapper().writeValueAsString( new UserDetails(((UserPrincipal) auth.getPrincipal()).getEmail() ,((UserPrincipal) auth.getPrincipal()).getId(), new SignupResponse(true,"Login Successful",token,getUserIdFromJWT(token), new FacebookPicture()))));
 
     }
 
